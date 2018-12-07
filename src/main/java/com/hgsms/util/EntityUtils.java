@@ -1,8 +1,7 @@
 package com.hgsms.util;
 
 
-import com.hgsms.jwt.AuthTokenDetails;
-import com.hgsms.jwt.JsonWebTokenUtility;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -22,13 +21,13 @@ import java.util.Date;
  * @since 1.7
  */
 public class EntityUtils {
-
-	private static AuthTokenDetails parseToken(String tokenHeader) {
-		JsonWebTokenUtility tokenService = new JsonWebTokenUtility();
-		AuthTokenDetails authTokenDetails =
-				tokenService.parseAndValidate(tokenHeader);
-		return authTokenDetails;
-	}
+//
+//	private static AuthTokenDetails parseToken(String tokenHeader) {
+//		JsonWebTokenUtility tokenService = new JsonWebTokenUtility();
+//		AuthTokenDetails authTokenDetails =
+//				tokenService.parseAndValidate(tokenHeader);
+//		return authTokenDetails;
+//	}
 
 	/**
 	 * 快速将bean的crtUser、crtHost、crtTime、updUser、updHost、updTime附上相关值
@@ -53,12 +52,12 @@ public class EntityUtils {
 		String hostIp = "";
 		String name = "";
 		String id = "";
-		if(request!=null) {
-			hostIp = request.getRemoteAddr();
-			AuthTokenDetails userDetails = parseToken(StringUtils.trimToEmpty(request.getHeader("Authorization")));
-			name = userDetails.getUsername();
-			id = userDetails.getId().toString();
-		}
+//		if(request!=null) {
+//			hostIp = request.getRemoteAddr();
+//			AuthTokenDetails userDetails = parseToken(StringUtils.trimToEmpty(request.getHeader("Authorization")));
+//			name = userDetails.getUsername();
+//			id = userDetails.getId().toString();
+//		}
 
 		if (StringUtils.isBlank(name)) {
 			name = BaseContextHandler.getUsername();
@@ -90,12 +89,12 @@ public class EntityUtils {
 		String hostIp = "";
 		String name = "";
 		String id = "";
-		if(request!=null) {
-			AuthTokenDetails userDetails = parseToken(StringUtils.trimToEmpty(request.getHeader("Authorization")));
-			hostIp = request.getRemoteAddr();
-			name = userDetails.getUsername();
-			id = userDetails.getId().toString();
-		}
+//		if(request!=null) {
+//			AuthTokenDetails userDetails = parseToken(StringUtils.trimToEmpty(request.getHeader("Authorization")));
+//			hostIp = request.getRemoteAddr();
+//			name = userDetails.getUsername();
+//			id = userDetails.getId().toString();
+//		}
 
 		if (StringUtils.isBlank(name)) {
 			name = BaseContextHandler.getUsername();
