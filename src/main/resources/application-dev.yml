@@ -83,3 +83,16 @@ jwt:
   rsa-secret: xx1WET12^%3^(WE45
 client:
   rsa-secret: x2318^^(*WRYQWR(QW&T
+
+
+datasource_1:
+  url: jdbc:sqlserver://localhost:1433;DatabaseName=ShortMessage
+  driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  username: sa
+  password: 123456
+
+#datasource_2:
+#  url: jdbc:sqlserver://localhost:1433;DatabaseName=ShortMessage
+#  driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#  username: sa
+#  password: 123456
