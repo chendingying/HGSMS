@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = MasterDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "masterSqlSessionFactory")
 public class MasterDataSourceConfig {
     // 精确到 master 目录，以便跟其他数据源隔离
-    static final String PACKAGE = "com.photo.warehouse.mapper.admin com.hgsms.mapper.message";
+    static final String PACKAGE = "com.hgsms.mapper.message";
     static final String MAPPER_LOCATION = "classpath*:mapper/**/*.xml";
 
     @Value("${datasource_1.url}")

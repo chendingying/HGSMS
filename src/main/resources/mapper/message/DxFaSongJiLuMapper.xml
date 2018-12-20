@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hgsms.mapper.message.DxFaSongJiLuMapper">
+    <resultMap id="BaseResultMap" type="com.hgsms.model.message.DxFaSongJiLu">
+        <result column="rec_id" property="recId"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="op_time" property="opTime"/>
+        <result column="is_error" property="isError"/>
+        <result column="error_mes" property="errorMes"/>
+        <result column="custom_number" property="customNumber"/>
+        <result column="stat" property="stat"/>
+        <result column="content" property="content"/>
+        <result column="dingshi" property="dingshi"/>
+        <result column="guoqi" property="guoqi"/>
+        <result column="type" property="type"/>
+        <result column="original_rec_id" property="originalRecId"/>
+        <result column="last_rec_id" property="lastRecId"/>
+        <result column="is_save" property="isSave"/>
+        <result column="top_ou_id" property="topOuId"/>
+        <result column="top_ou_name" property="topOuName"/>
+        <result column="top_ou_sort_id" property="topOuSortId"/>
+        <result column="is_in_use" property="isInUse"/>
+        <result column="status" property="status"/>
+        <result column="fasongNumber" property="fasongNumber"/>
+    </resultMap>
+
+    <!--发送列表  -->
+    <select id="seleectFaSongJiLuPage"  resultMap="BaseResultMap">
+
+        select f.user_name as user_name,
+        f.user_id as user_id,
+        <![CDATA[
+        case when len(f.content) > 30 then left(f.content,30) + '...' else f.content end as content,
+             ]]>
+        f.op_time as op_time,
+        case isnull(s.status, 7)
+        when 1 then '未发送'
+        when 2 then '已发送'
+        when 7 then '未提交'
+        else  '未明状态'
+        end as status,
+        f.rec_id as rec_id
+        from dx_fasongjilu f
+        left outer join sed s
+        on f.rec_id = s.rec_id
+        where f.is_in_use = 1
+        and  f.user_id = #{dxFaSongJiLu.userId}
+        <if test="dxFaSongJiLu.content != null">
+            and f.content like '%'+#{dxFaSongJiLu.content}+'%'
+        </if>
+        <if test="dxFaSongJiLu.beginTime !=null and dxFaSongJiLu.endTime != null">
+            and f.op_time between #{dxFaSongJiLu.beginTime} and #{dxFaSongJiLu.endTime}
+        </if>
+        order by f.op_time desc
+    </select>
+
+    <select id="selectFaSongReport" resultMap="BaseResultMap">
+
+   select top ${limit} o.* from (select * from(select top_ou_name as 'top_ou_name', count(*) as 'fasongNumber'
+      <![CDATA[
+from dx_fasongjilu GROUP BY top_ou_name) as oo) as o where top_ou_name>
+ ]]>
+#{page}
+        <if test="beginTime !=null and endTime != null">
+            and f.op_time between #{beginTime} and #{endTime}
+        </if>
+</select>
+
+    <select id="selectFaSongReportCount" resultType="java.lang.Long">
+        select count(0) as total from (select top_ou_name , count(1) as 'fasongNumber'  from dx_fasongjilu GROUP BY top_ou_name) tmp_count
+    </select>
+
+
+
+</mapper>

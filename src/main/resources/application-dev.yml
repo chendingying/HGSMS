@@ -18,7 +18,7 @@ spring:
         defaultPropertyInclusion: ALWAYS
         ##sqlserver
     datasource:
-        url: jdbc:sqlserver://localhost:1433;DatabaseName=HGSMS
+        url: jdbc:sqlserver://localhost:1433;DatabaseName=ShortMessage
         driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
         username: sa
         password: 123456
@@ -86,13 +86,13 @@ client:
 
 
 datasource_1:
-  url: jdbc:sqlserver://localhost:1433;DatabaseName=ShortMessage
+  url: jdbc:sqlserver://localhost:1433;DatabaseName=ShorMessage
   driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   username: sa
   password: 123456
 
 #datasource_2:
-#  url: jdbc:sqlserver://localhost:1433;DatabaseName=ShortMessage
+#  url: jdbc:sqlserver://localhost:1433;DatabaseName=ShorMessage
 #  driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 #  username: sa
 #  password: 123456

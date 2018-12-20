@@ -41,4 +41,6 @@ public class ApplicationSpringBoot extends WebMvcConfigurerAdapter {
     UserAuthConfig getUserAuthConfig(){
         return new UserAuthConfig();
     }
+
+
 }
